@@ -1,7 +1,4 @@
-require_relative 'lib/Node'
+require_relative 'lib/Tree'
 
-greater_node = Node.new(2)
-lesser_node = Node.new(1)
-
-p greater_node > lesser_node
-p greater_node < lesser_node
+test = Tree.new([0,1,2,3])
+test.pretty_print
