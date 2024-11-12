@@ -26,4 +26,15 @@ class Tree
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
+
+  def insert(subroot = root, value)
+    value = Node.new(value) if value.is_a?(Integer)
+    # base case
+    return value if subroot.nil?
+    return subroot if subroot == value
+
+    # recursive case
+    subroot < value ? subroot.right = insert(subroot.right, value) : subroot.left = insert(subroot.left, value)
+    subroot
+  end
 end
