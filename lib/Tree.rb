@@ -55,7 +55,6 @@ class Tree
       #children
       curr.data = find_min(curr.right).data
       curr.right = remove(curr.right, curr.data)
-      
     end
     curr
   end
@@ -67,5 +66,13 @@ class Tree
     node
   end
 
-  # def child()
+  def find(curr = root, value)
+    # base case
+    return curr if curr.data = value
+
+    # recurse 
+    find(curr.right, value) if curr.data < value 
+    find(curr.left, value) if curr.data > value
+  end
+
 end
