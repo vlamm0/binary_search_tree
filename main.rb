@@ -8,10 +8,9 @@ arr.each {|val| test.insert(val)}
 test.pretty_print
 test.remove(23)
 test.pretty_print
-#p test.find(324)
-#test.level_order {|curr| puts curr.data}
-test.indorder {|curr| puts curr.data}
-puts
-test.preorder {|curr| puts curr.data}
-puts
-test.postorder {|curr| puts curr.data}
+puts test.height(test.find(8))
+puts test.height(test.find(12))
+puts test.height(test.find(67))
+puts test.depth(test.find(8))
+puts test.depth(test.find(4))
+puts test.depth(test.find(12))

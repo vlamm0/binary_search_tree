@@ -110,4 +110,31 @@ class Tree
     dfs(curr.right, order, &block)
     yield(curr) if order == "post"
   end
+
+  def height(node)
+    # base
+    children = [node.right, node.left].select {|child| !child.nil?}
+    return 0 if children.empty?
+    
+    # recurse
+    heights = children.map {|child| height(child)}
+    heights.max + 1
+  end
+
+  def depth(target, curr = root)
+    # recursive
+    # return 0 if curr == target
+    # counter = 1
+    # counter += depth(target, curr.right) if curr < target
+    # counter += depth(target, curr.left) if curr > target
+    # counter
+    #iterative
+    counter = 0
+    while curr != target
+      curr < target ? curr = curr.right : curr = curr.left
+      counter += 1
+    end
+    counter
+  end
+
 end
