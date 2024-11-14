@@ -9,4 +9,9 @@ test.pretty_print
 test.remove(23)
 test.pretty_print
 #p test.find(324)
-test.level_order {|curr| puts curr.data}
+#test.level_order {|curr| puts curr.data}
+test.indorder {|curr| puts curr.data}
+puts
+test.preorder {|curr| puts curr.data}
+puts
+test.postorder {|curr| puts curr.data}

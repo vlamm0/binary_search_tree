@@ -87,4 +87,27 @@ class Tree
     #   yield(curr)
     # end
   end
+
+  def indorder(&block)
+    dfs("in", &block)
+  end
+
+  def preorder(curr = root, &block)
+    dfs("pre", &block)
+  end
+
+  def postorder(curr = root, &block)
+    dfs("post", &block)
+  end
+
+  def dfs(curr = root, order, &block)
+    #base
+    return nil if curr.nil?
+    #recurse
+    yield(curr) if order == "pre"
+    dfs(curr.left, order, &block)
+    yield(curr) if order == "in"
+    dfs(curr.right, order, &block)
+    yield(curr) if order == "post"
+  end
 end
