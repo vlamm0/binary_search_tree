@@ -10,11 +10,9 @@ class Tree
   def build_tree(arr, start, tail)
     # base
     return nil if start > tail
-
     # vars
     mid = (tail + start)/2    
     curr = Node.new(arr[mid])
-
     # recurse
     curr.left = build_tree(arr, start, mid - 1)
     curr.right = build_tree(arr, mid + 1, tail)
@@ -32,7 +30,6 @@ class Tree
     # base case
     return value if curr.nil?
     return curr if curr == value
-
     # recursive case
     curr < value ? curr.right = insert(curr.right, value) : curr.left = insert(curr.left, value)
     return curr
@@ -41,17 +38,14 @@ class Tree
   def remove(curr = root, value)
     # base care
     return curr if curr.nil?
-
     # recursive case
     curr.right = remove(curr.right, value) if curr.data < value 
     curr.left = remove(curr.left, value) if curr.data > value
-
     if curr.data == value
       #child
       children = [curr.left, curr.right]
       return nil if children.all? {|child| child.nil?}
       return children.select {|child| !child.nil?}[0] if children.any? {|child| child.nil?}
-
       #children
       curr.data = find_min(curr.right).data
       curr.right = remove(curr.right, curr.data)
@@ -68,11 +62,29 @@ class Tree
 
   def find(curr = root, value)
     # base case
-    return curr if curr.data = value
-
+    return curr if curr.data == value
+    return nil if curr.data == nil
     # recurse 
-    find(curr.right, value) if curr.data < value 
-    find(curr.left, value) if curr.data > value
+    curr = find(curr.right, value) if curr.data < value 
+    curr = find(curr.left, value) if curr.data > value
+    curr
   end
 
+  def level_order(q = [root], &block)#&block
+    # base case
+    return if q.empty?
+    # recurse
+    curr = q.shift
+    q.push(curr.left) if !curr.left.nil?
+    q.push(curr.right) if !curr.right.nil?
+    yield(curr)
+    level_order(q, &block)
+    #iterative approach
+    # while !q.empty?
+    #   curr = q.shift
+    #   q.push(curr.left) if !curr.left.nil?
+    #   q.push(curr.right) if !curr.right.nil?
+    #   yield(curr)
+    # end
+  end
 end
