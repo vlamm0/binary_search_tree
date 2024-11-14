@@ -137,4 +137,10 @@ class Tree
     counter
   end
 
+  
+  def balanced?
+   diff = (height(root.right) - height(root.left)).abs
+   diff <= 1
+  end
+
 end
