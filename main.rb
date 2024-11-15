@@ -10,3 +10,6 @@ arr.each {|val| test.insert(val)}
 test.remove(23)
 test.pretty_print
 puts test.balanced?
+puts test.rebalance
+test.pretty_print
+puts test.balanced?

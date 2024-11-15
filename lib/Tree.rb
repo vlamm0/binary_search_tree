@@ -88,7 +88,7 @@ class Tree
     # end
   end
 
-  def indorder(&block)
+  def inorder(&block)
     dfs("in", &block)
   end
 
@@ -115,7 +115,6 @@ class Tree
     # base
     children = [node.right, node.left].select {|child| !child.nil?}
     return 0 if children.empty?
-    
     # recurse
     heights = children.map {|child| height(child)}
     heights.max + 1
@@ -137,10 +136,14 @@ class Tree
     counter
   end
 
-  
   def balanced?
    diff = (height(root.right) - height(root.left)).abs
    diff <= 1
   end
 
+  def rebalance
+    arr = []
+    inorder { |curr| arr.push(curr.data)}
+    self.root = build_tree(arr, 0, arr.length - 1)
+  end
 end
